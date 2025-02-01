@@ -1,0 +1,30 @@
+{
+  "name": "nodejstutorial",
+  "version": "1.0.0",
+  "description": "a simple task creator and manager web application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "github.com/gourab-stu/NodejsTutorial"
+  },
+  "keywords": [
+    "nodejs",
+    "tutorial"
+  ],
+  "author": "Gourab Acharjee",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
