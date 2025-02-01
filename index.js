@@ -18,7 +18,7 @@ app.set("view engine", "ejs");
 
 app.get("/", async (req, res) => {
     const tasks = await taskModel.find();
-    res.render("index", { tasks: tasks });
+    res.render("index", { tasks });
 });
 
 app.post("/create", async (req, res) => {
@@ -29,33 +29,35 @@ app.post("/create", async (req, res) => {
     res.redirect("/");
 });
 
-app.post("/edit", async (req, res) => {
-    await taskModel.updateOne({ title: req.body.oldTitle }, { title: req.body.newTitle, details: req.body.newDetails });
+app.post("/update/:id", async (req, res) => {
+    let { title, details } = req.body;
+    await taskModel.updateOne({ _id: req.body.id }, { title, details });
     res.redirect("/");
 });
 
-app.get("/view/:taskTitle", async (req, res) => {
-    const task = await taskModel.findOne({ title: req.params.taskTitle.split(".").join(" ") });
-    res.render("view", { task: task });
+app.get("/view/:id", async (req, res) => {
+    const task = await taskModel.findOne({ _id: req.params.id });
+    res.render("view", { task });
 });
 
-app.get("/delete/:taskTitle", async (req, res) => {
-    await taskModel.deleteOne({ title: req.params.taskTitle.split(".").join(" ") });
+app.get("/delete/:id", async (req, res) => {
+    await taskModel.deleteOne({ _id: req.params.id });
     res.redirect("/");
     
 });
 
-app.get("/edit/:taskTitle", async (req, res) => {
-    const task = await taskModel.findOne({ title: req.params.taskTitle.split(".").join(" ") });
-    res.render("edit", {task: task });
+app.get("/edit/:id", async (req, res) => {
+    const task = await taskModel.findOne({ _id: req.params.id });
+    res.render("edit", { task });
 });
 
-app.listen(process.env.PORT || 2025, async () => {
-    try {
-        await mongoose.connect(`${process.env.MONGODB_URI}/${process.env.MONGODB_DBNAME}`);
-    } catch (err) {
-        console.error(err);
-    } finally {
-        console.log(`Server is running on port ${process.env.PORT || 2025}`);
-    }
+app.listen(process.env.PORT || 2025, () => {
+    mongoose
+        .connect(`${process.env.MONGODB_URI}/${process.env.MONGODB_DBNAME}`)
+        .then(() => {
+            console.log(`Server is running on port ${process.env.PORT || 2025}`);
+        })
+        .catch((err) => {
+            console.error(err);
+        });
 });
