@@ -22,16 +22,14 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/create", async (req, res) => {
-    await taskModel.create({
-        title: req.body.title,
-        details: req.body.details
-    });
+    let { title, details } = req.body;
+    await taskModel.create({ title, details });
     res.redirect("/");
 });
 
 app.post("/update/:id", async (req, res) => {
     let { title, details } = req.body;
-    await taskModel.updateOne({ _id: req.body.id }, { title, details });
+    await taskModel.updateOne({ _id: req.params.id }, { title, details });
     res.redirect("/");
 });
 
@@ -52,10 +50,11 @@ app.get("/edit/:id", async (req, res) => {
 });
 
 app.listen(process.env.PORT || 2025, () => {
+    console.log(`Application server is running on port ${process.env.PORT || 2025}`);
     mongoose
         .connect(`${process.env.MONGODB_URI}/${process.env.MONGODB_DBNAME}`)
         .then(() => {
-            console.log(`Server is running on port ${process.env.PORT || 2025}`);
+            console.log("application server is connected to database server");
         })
         .catch((err) => {
             console.error(err);
