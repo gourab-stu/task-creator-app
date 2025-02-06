@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://res.cloudinary.com/dvkmi9cmw/image/upload/v1738417349/task-creator-app-db/favicon.ico" />
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="/javascripts/register.js"></script>
+    <title><%= message %></title>
+  </head>
+  <body class="h-full bg-slate-900">
+    <div class="flex flex-col justify-center px-6 py-20 lg:px-8">
+      <div class="card bg-slate-800 mt-10 sm:mx-auto sm:w-full sm:max-w-md rounded-lg shadow-lg p-8 pb-10">
+        <p class="m-9 text-center text-gray-300">
+          <%= message %>
+          <a href="<%= url %>" class="font-semibold text-sky-600 hover:text-sky-500"><%= instruction %></a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

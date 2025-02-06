@@ -2,8 +2,16 @@ import mongoose from "mongoose";
 
 const taskSchema = mongoose.Schema(
     {
-        title: String,
-        details: String
+        title: {
+            type:String,
+            required: true,
+            trim: true
+        },
+        details: {
+            type: String,
+            required: true,
+            trim: true
+        }
     },
     { timestamps: true }
 );
