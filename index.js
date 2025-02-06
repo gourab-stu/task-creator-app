@@ -115,8 +115,8 @@ app.use((err, req, res, next) => {
     res.status(500).render("error", { message: err.message, url: "/", instruction: "Go to homepage" });
 });
 
-app.listen(process.env.PORT || 2025, () => {
-    console.log(`Application server is running on port ${process.env.PORT || 2025}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Application server is running`);
     mongoose
         .connect(`${process.env.MONGODB_URI}/${process.env.MONGODB_DBNAME}`)
         .then(() => {
